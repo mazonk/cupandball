@@ -1,24 +1,26 @@
 <template>
     <div class="flex flex-col items-center justify-center h-screen">
       <h1 class="text-2xl font-bold mb-4">Cup and Ball Game</h1>
-      <div class="flex space-x-4">
+      <div class="flex space-x-4 relative">
         <div
           v-for="(cup, index) in cups"
           :key="index"
           class="relative"
           @click="selectCup(index)"
         >
-          <div
-            class="w-24 h-24 bg-gray-400 rounded-t-full transform transition-transform duration-500"
+          <img
+            src="src/assets/cup.jpg"
+            class="w-24 h-24 transform transition-transform duration-500"
             :class="{
               'translate-y-0': selectedCup === index || showBallIndex === index,
               'translate-y-8': selectedCup !== index && showBallIndex !== index
             }"
-          ></div>
-          <div
+          />
+          <img
             v-if="showBall && ballPosition === index"
-            class="w-12 h-12 bg-red-500 rounded-full absolute bottom-0 left-1/2 transform -translate-x-1/2"
-          ></div>
+            src="src\assets\ball.jpg"
+            class="w-12 h-12 absolute bottom-0 left-1/2 transform -translate-x-1/2"
+          />
         </div>
       </div>
       <button
