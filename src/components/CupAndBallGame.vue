@@ -9,8 +9,8 @@
           @click="selectCup(index)"
         >
           <img
-            src="src/assets/cup.jpg"
-            class="w-24 h-24 transform transition-transform duration-500"
+            :src="cupImage"
+            class="cup-image transform transition-transform duration-1000"
             :class="{
               'translate-y-0': selectedCup === index || showBallIndex === index,
               'translate-y-8': selectedCup !== index && showBallIndex !== index
@@ -18,8 +18,8 @@
           />
           <img
             v-if="showBall && ballPosition === index"
-            src="src\assets\ball.jpg"
-            class="w-12 h-12 absolute bottom-0 left-1/2 transform -translate-x-1/2"
+            :src="ballImage"
+            class="ball-image absolute bottom-0 left-1/2 transform -translate-x-1/2"
           />
         </div>
       </div>
@@ -35,6 +35,8 @@
   
   <script lang="ts">
   import { defineComponent, ref } from 'vue';
+  import cupImage from '@/assets/cup.jpg';
+  import ballImage from '@/assets/ball.jpg';
   
   export default defineComponent({
     name: 'CupAndBallGame',
@@ -57,7 +59,7 @@
                 [cups.value[a], cups.value[b]] = [cups.value[b], cups.value[a]];
               }
               resolve();
-            }, 500)
+            }, 1000)
           );
         }
       };
@@ -88,11 +90,31 @@
         showBall,
         startGame,
         selectCup,
+        cupImage,
+        ballImage,
       };
     },
   });
   </script>
   
   <style scoped>
+  .cup-image {
+    width: 6rem; 
+    height: 6rem;
+    margin-bottom: 1rem;
+
+  }
+  
+  .ball-image {
+    width: 4rem;
+    height: 4rem;
+    margin-bottom: 1rem;
+  }
+  
+  .relative {
+    display: flex;
+    align-items: flex-end; /* Align ball to the bottom of the cup */
+    justify-content: center; /* Center the ball horizontally */
+  }
   </style>
   
